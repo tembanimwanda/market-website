@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Payments | Vendor Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="vendor-dashboard.css">
+</head>
+<body>
+
+<header style="display:flex;align-items:center;justify-content:space-between;">
+  <button class="back-btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+  <h1>My Payments</h1>
+</header>
+
+<div class="container" id="paymentsContainer"></div>
+
+<footer>
+  © 2026 Market Booth Management System | Vendor Panel
+</footer>
+
+<script>
+function logout(){
+  sessionStorage.clear();
+  window.location.href="login.html";
+}
+
+// Ensure vendor is logged in
+const role = sessionStorage.getItem("userRole");
+const username = sessionStorage.getItem("username");
+if(!role || role !== "Vendor"){
+  alert("Unauthorized access. Please login as Vendor.");
+  window.location.href = "login.html";
+}
+
+// Load vendor payments
+const applications = JSON.parse(localStorage.getItem("applications") || "[]");
+const myApps = applications.filter(app => app.vendor_name === username);
+
+const container = document.getElementById("paymentsContainer");
+
+if(myApps.length === 0){
+  container.innerHTML = "<p>No payments found yet.</p>";
+} else {
+  myApps.forEach(app => {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+      <i class="fas fa-credit-card"></i>
+      <h3>Booth ${app.booth_number}</h3>
+      <p><strong>Amount Paid:</strong> K${app.payment_amount}</p>
+      <p><strong>Payment Mode:</strong> ${app.payment_mode}</p>
+      <p><strong>Reference:</strong> ${app.payment_reference}</p>
+      <p><strong>Status:</strong> ${app.status}</p>
+    `;
+    container.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>

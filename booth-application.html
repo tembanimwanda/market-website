@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Booth Application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="booth-application.css">
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Booth Application</h2>
+
+  <label>Booth Number</label>
+  <input type="text" id="boothNumber" readonly>
+
+  <label>Booth Location</label>
+  <input type="text" id="boothLocation" readonly>
+
+  <label>Booth Size</label>
+  <input type="text" id="boothSize" readonly>
+
+  <label>Booth Price (K)</label>
+  <input type="text" id="boothPrice" readonly>
+
+  <label>Payment Amount (K)</label>
+  <input type="number" id="paymentAmount" required>
+
+  <label>Mode of Payment</label>
+  <select id="paymentMode" onchange="togglePaymentFields()" required>
+    <option value="">-- Select Payment Mode --</option>
+    <option value="Mobile Money">Mobile Money</option>
+    <option value="Cash">Cash</option>
+    <option value="Bank Transfer">Bank Transfer</option>
+  </select>
+
+  <div id="networkBox" style="display:none">
+    <label>Mobile Money Network</label>
+    <input type="text" id="mobileNetwork" readonly>
+  </div>
+
+  <div id="referenceBox" style="display:none">
+    <label>Payment Reference / Transaction ID</label>
+    <input type="text" id="paymentRef">
+  </div>
+
+  <label>Vendor Full Name</label>
+  <input type="text" id="vendorName" required>
+
+  <label>Business Name</label>
+  <input type="text" id="businessName" required>
+
+  <label>Phone Number</label>
+  <input type="tel" id="phone" required>
+
+  <label>Email</label>
+  <input type="email" id="email" required>
+
+  <label>NRC / ID Number</label>
+  <input type="text" id="nrc" required>
+
+  <button onclick="submitApplication()">Pay & Submit Application</button>
+  <button id="backBtn" type="button" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+</div>
+
+<div id="paymentOverlay">
+  <div class="loader"></div>
+  Processing Payment...
+</div>
+
+<div id="successNotification">
+  Payment successful! Application submitted.
+</div>
+<script src="booth-application.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Reports</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:#f4f6f8;
+}
+header{
+  background:linear-gradient(135deg,#1abc9c,#3498db);
+  color:#fff;
+  padding:20px;
+}
+header h1{margin:0;font-size:22px}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:25px;
+}
+
+.summary{
+  display:grid;
+  gap:20px;
+}
+@media(min-width:768px){
+  .summary{grid-template-columns:repeat(4,1fr)}
+}
+
+.box{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  text-align:center;
+}
+.box i{
+  font-size:28px;
+  color:#1abc9c;
+  margin-bottom:10px;
+}
+.box h3{
+  margin:8px 0;
+  font-size:22px;
+}
+.box p{
+  font-size:13px;
+  color:#666;
+}
+
+/* TABLE */
+.table-card{
+  margin-top:30px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  padding:20px;
+}
+.table-card h2{
+  margin-bottom:15px;
+  font-size:18px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+th{
+  background:#f9fafb;
+}
+.status-paid{color:#2ecc71;font-weight:bold}
+.status-pending{color:#f39c12;font-weight:bold}
+.status-overdue{color:#e74c3c;font-weight:bold}
+
+footer{
+  text-align:center;
+  padding:15px;
+  font-size:13px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Reports & Analytics</h1>
+</header>
+
+<div class="container">
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary">
+    <div class="box">
+      <i class="fas fa-store"></i>
+      <h3 id="totalBooths">0</h3>
+      <p>Total Booths</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-check-circle"></i>
+      <h3 id="occupiedBooths">0</h3>
+      <p>Occupied Booths</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-users"></i>
+      <h3 id="totalVendors">0</h3>
+      <p>Active Vendors</p>
+    </div>
+    <div class="box">
+      <i class="fas fa-money-bill-wave"></i>
+      <h3 id="totalRevenue">K0</h3>
+      <p>Total Revenue</p>
+    </div>
+  </div>
+
+  <!-- PAYMENTS REPORT -->
+  <div class="table-card">
+    <h2>Payment Report</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Booth</th>
+          <th>Month</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="paymentTable"></tbody>
+    </table>
+  </div>
+
+  <!-- CONTRACT STATUS -->
+  <div class="table-card">
+    <h2>Contract Status</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Booth</th>
+          <th>Next Due</th>
+          <th>Penalty</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="contractTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Market Booth Allocation System | Reports
+</footer>
+
+<script>
+
+// LOAD REPORT DATA
+async function loadReports(){
+
+  const booths = await (await fetch("/api/booths")).json();
+  const vendors = await (await fetch("/api/vendors")).json();
+  const contracts = await (await fetch("/api/contracts")).json();
+  const payments = await (await fetch("/api/payments")).json();
+
+  // SUMMARY
+  document.getElementById("totalBooths").textContent = booths.length;
+  document.getElementById("occupiedBooths").textContent =
+    vendors.filter(v=>v.payment_status==="Completed").length;
+  document.getElementById("totalVendors").textContent = vendors.length;
+
+  let revenue = payments
+    .filter(p=>p.status==="Paid")
+    .reduce((sum,p)=>sum + Number(p.amount),0);
+  document.getElementById("totalRevenue").textContent = "K"+revenue;
+
+  // PAYMENTS TABLE
+  const paymentTable = document.getElementById("paymentTable");
+  paymentTable.innerHTML="";
+  payments.forEach(p=>{
+    paymentTable.innerHTML+=`
+      <tr>
+        <td>${p.vendor_name}</td>
+        <td>${p.booth}</td>
+        <td>${p.month}</td>
+        <td>K${p.amount}</td>
+        <td class="status-${p.status.toLowerCase()}">${p.status}</td>
+      </tr>`;
+  });
+
+  // CONTRACTS TABLE
+  const contractTable = document.getElementById("contractTable");
+  contractTable.innerHTML="";
+  contracts.forEach(c=>{
+    contractTable.innerHTML+=`
+      <tr>
+        <td>${c.vendor_name}</td>
+        <td>${c.booth}</td>
+        <td>${c.next_due}</td>
+        <td>K${c.penalty}</td>
+        <td class="status-${c.status.toLowerCase()}">${c.status}</td>
+      </tr>`;
+  });
+}
+
+loadReports();
+</script>
+
+</body>
+</html>

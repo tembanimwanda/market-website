@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Available Booths</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="booths.css">
+</head>
+<body>
+
+<header>
+  <h2>Admin Dashboard • Available Booths</h2>
+  <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</header>
+
+<div class="container">
+
+  <!-- ADD / EDIT BOOTH -->
+  <div class="card">
+    <h3>Add / Edit Booth</h3><br>
+    <div class="form-grid">
+      <input id="boothNo" placeholder="Booth Number (e.g B12)">
+      <select id="size">
+        <option value="">Size</option>
+        <option value="3x3">3x3</option>
+        <option value="4x4">4x4</option>
+        <option value="5x5">5x5</option>
+      </select>
+      <input id="price" placeholder="Monthly Price">
+      <select id="status">
+        <option>Available</option>
+        <option>Reserved</option>
+        <option>Occupied</option>
+      </select>
+      <input id="location" placeholder="Location">
+    </div><br>
+    <button class="btn-save" onclick="saveBoothBackend()"><i class="fas fa-save"></i> Save Booth</button>
+    <button class="btn-clear" onclick="clearForm()"><i class="fas fa-broom"></i> Clear</button>
+  </div>
+
+  <!-- AVAILABLE BOOTH TABLE -->
+  <div class="card table-wrap">
+    <h3>Available Booths</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Booth</th>
+          <th>Size</th>
+          <th>Price</th>
+          <th>Location</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="boothTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+// ===== ELEMENTS =====
+const boothNoInput = document.getElementById("boothNo");
+const sizeInput = document.getElementById("size");
+const priceInput = document.getElementById("price");
+const statusInput = document.getElementById("status");
+const locationInput = document.getElementById("location");
+const boothTable = document.getElementById("boothTable");
+
+let editBoothNumber = null;
+
+// ===== LOAD BOOTHS =====
+function loadBoothsBackend() {
+  fetch("http://127.0.0.1:5000/api/booths")
+    .then(res => res.json())
+    .then(data => {
+      boothTable.innerHTML = "";
+      data.forEach(b => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${b.booth_number}</td>
+          <td>${b.size}</td>
+          <td>K${b.price}</td>
+          <td>${b.location}</td>
+          <td>${b.status}</td>
+          <td>
+            <button class="action edit" onclick="editBoothBackend('${b.booth_number}')"><i class="fas fa-edit"></i> Edit</button>
+            <button class="action delete" onclick="deleteBoothBackend('${b.booth_number}')"><i class="fas fa-trash"></i> Delete</button>
+          </td>
+        `;
+        boothTable.appendChild(row);
+      });
+    })
+    .catch(err => console.error("Error loading booths:", err));
+}
+
+// ===== SAVE / UPDATE BOOTH =====
+function saveBoothBackend() {
+  const boothNo = boothNoInput.value.trim();
+  const size = sizeInput.value;
+  const price = Number(priceInput.value.trim());
+  const status = statusInput.value;
+  const location = locationInput.value.trim();
+
+  if (!boothNo || !size || !price || !location) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  const payload = { booth_number: boothNo, size, price, status, location };
+
+  const method = editBoothNumber ? "PUT" : "POST";
+  const url = editBoothNumber
+    ? `http://127.0.0.1:5000/api/booths/${editBoothNumber}`
+    : `http://127.0.0.1:5000/api/booths`;
+
+  fetch(url, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+      clearForm();
+      loadBoothsBackend();
+      editBoothNumber = null;
+    })
+    .catch(err => console.error("Error saving booth:", err));
+}
+
+// ===== EDIT BOOTH =====
+function editBoothBackend(boothNumber) {
+  fetch(`http://127.0.0.1:5000/api/booths/${boothNumber}`)
+    .then(res => res.json())
+    .then(b => {
+      boothNoInput.value = b.booth_number;
+      sizeInput.value = b.size;
+      priceInput.value = b.price;
+      statusInput.value = b.status;
+      locationInput.value = b.location;
+      editBoothNumber = b.booth_number;
+    });
+}
+
+// ===== DELETE BOOTH =====
+function deleteBoothBackend(boothNumber) {
+  if (!confirm(`Delete booth ${boothNumber}?`)) return;
+
+  fetch(`http://127.0.0.1:5000/api/booths/${boothNumber}`, {
+    method: "DELETE"
+  })
+    .then(res => res.json())
+    .then(() => loadBoothsBackend())
+    .catch(err => console.error("Error deleting booth:", err));
+}
+
+// ===== CLEAR FORM =====
+function clearForm() {
+  boothNoInput.value = "";
+  sizeInput.value = "";
+  priceInput.value = "";
+  statusInput.value = "Available";
+  locationInput.value = "";
+  editBoothNumber = null;
+}
+
+// ===== LOGOUT =====
+function logout() {
+  sessionStorage.clear();
+  window.location.href = "login.html";
+}
+
+// ===== INITIAL LOAD =====
+document.addEventListener("DOMContentLoaded", loadBoothsBackend);
+</script>
+
+</body>
+</html>

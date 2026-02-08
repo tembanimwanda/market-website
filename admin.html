@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- External Admin CSS -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<header style="display:flex;align-items:center;justify-content:space-between;">
+  <button class="back-btn" onclick="goBack()">
+    <i class="fas fa-arrow-left"></i> Back
+  </button>
+  <h1>Admin Dashboard – Market Booth Management System</h1>
+</header>
+
+<div class="container">
+
+  <div class="grid">
+
+    <!-- BOOTHS -->
+    <div class="card">
+      <i class="fas fa-store"></i>
+      <h3>Booth Management</h3>
+      <p>Add, edit, and control booth availability.</p>
+      <a href="booths.html">Manage Booths</a>
+    </div>
+
+    <!-- VENDORS -->
+    <div class="card">
+      <i class="fas fa-users"></i>
+      <h3>Vendor Management</h3>
+      <p>Approve vendors and manage categories.</p>
+      <a href="vendor-application.html">Manage Vendors</a>
+    </div>
+
+    <!-- CONTRACTS -->
+    <div class="card">
+      <i class="fas fa-file-contract"></i>
+      <h3>Contracts</h3>
+      <p>Monthly rent, penalties & contract status.</p>
+      <a href="contract.html">Manage Contracts</a>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="card">
+      <i class="fas fa-credit-card"></i>
+      <h3>Payments</h3>
+      <p>Track all payments and outstanding balances.</p>
+      <a href="payment.html">View Payments</a>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="card">
+      <i class="fas fa-chart-line"></i>
+      <h3>Reports & Analytics</h3>
+      <p>Occupancy, revenue & performance reports.</p>
+      <a href="admin-reports.html">View Reports</a>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="card">
+      <i class="fas fa-cogs"></i>
+      <h3>System Settings</h3>
+      <p>Configure penalties, rent & system rules.</p>
+      <a href="admin-settings.html">System Settings</a>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Market Booth Management System | Admin Panel
+</footer>
+<script src="admin.js"></script>
+
+</body>
+</html>

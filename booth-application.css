@@ -1,0 +1,86 @@
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial}
+body{background:#f4f6f8;padding:40px}
+
+.form-box{
+  max-width:600px;
+  margin:auto;
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+h2{text-align:center;margin-bottom:25px;color:#1abc9c}
+
+label{font-weight:bold;font-size:14px;margin-top:15px;display:block}
+input,select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+input[readonly]{background:#eef2f7}
+
+button{
+  margin-top:15px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:20px;
+  background:#1abc9c;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{background:#16a085}
+
+#backBtn{
+  background:#ccc;
+  color:#000;
+}
+#backBtn:hover{background:#999}
+
+/* OVERLAY */
+#paymentOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:#fff;
+  font-size:20px;
+  font-weight:bold;
+}
+#paymentOverlay.active{display:flex}
+
+.loader{
+  border:8px solid #f3f3f3;
+  border-top:8px solid #1abc9c;
+  border-radius:50%;
+  width:70px;
+  height:70px;
+  animation:spin 1s linear infinite;
+  margin-bottom:15px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SUCCESS */
+#successNotification{
+  display:none;
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#1abc9c;
+  color:#fff;
+  padding:15px 25px;
+  border-radius:10px;
+  font-weight:bold;
+  z-index:10000;
+}

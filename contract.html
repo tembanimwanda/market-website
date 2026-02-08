@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Contract Management</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="contract.css">
+</head>
+<body>
+
+<header>
+  <h2>Admin • Contract Management</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+<!-- ADD / EDIT CONTRACT -->
+<div class="card">
+  <h3>Add / Edit Contract</h3><br>
+  <div class="form-grid">
+    <select id="vendorName">
+      <option value="">Select Vendor</option>
+    </select>
+
+    <input id="boothNo" placeholder="Booth Number" readonly>
+    <input id="startDate" type="date">
+    <input id="endDate" type="date">
+    <input id="amount" type="number" placeholder="Amount (K)">
+    <select id="paymentStatus">
+      <option value="Pending">Pending</option>
+      <option value="Paid">Paid</option>
+      <option value="Overdue">Overdue</option>
+    </select>
+  </div><br>
+  <button class="btn-save" onclick="saveContract()">Save Contract</button>
+  <button class="btn-clear" onclick="clearForm()">Clear</button>
+</div>
+
+<!-- CONTRACT TABLE -->
+<div class="card table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Vendor</th>
+  <th>Booth</th>
+  <th>Start Date</th>
+  <th>End Date</th>
+  <th>Amount</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+</thead>
+<tbody id="contractTable"></tbody>
+</table>
+</div>
+
+</div>
+
+<script src="contract.js"></script>
+</body>
+</html>

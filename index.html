@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Booth Management System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="navbar">
+    <h1>Market Booth Management System</h1>
+    <div>
+      <a href="#booths">Booths</a>
+      <a href="#offers">Offers</a>
+      <a href="#services">Services</a>
+
+      <a href="#testimonials">Testimonials</a>
+      <a href="#" onclick="validateApply()">Apply</a>
+      <a href="login.html">Login</a>
+
+    </div>
+  </div> 
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h2> Market Booth Management System</h2>
+  <p>Select your preferred booth and apply instantly online</p>
+  <a href="#booths" class="btn">View Available Booths</a>
+</section>
+  <br>
+<!-- AVAILABLE BOOTHS -->
+<section id="booths" style="padding:25px 8px; max-width:1400px; margin:auto;">
+  <div class="section-title" style="text-align:center; margin-bottom:40px;">
+    <h3 style="font-size:28px; color:#2b3488;">Available Booths</h3>
+    <p style="color:#8d282d; font-size:16px;">Select your preferred booth and apply instantly</p>
+  </div>
+
+  <div id="boothGrid" style="
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(10px,1fr));
+    gap:25px;
+  "></div>
+</section>
+  <br>
+<!-- SPECIAL OFFERS -->
+<section id="offers">
+  <div class="section-title">
+    <h3>🔥 Special Vendor Offers</h3>
+    <p class="offer-sub">Limited-time opportunities</p>
+    <p class="offer-sub">To grab this offers please visit the admin office as soon as possible</p>
+  </div>
+
+  <div class="offers-grid">
+    <div class="offer-card">
+      <span class="offer-badge">HOT DEAL</span>
+      <h4>3x3 Starter</h4>
+      <p class="offer-price"><del>K500</del> <strong>K400</strong></p>
+    </div>
+
+    <div class="offer-card">
+      <span class="offer-badge green">BEST VALUE</span>
+      <h4>4x4 Business</h4>
+      <p class="offer-price"><del>K800</del> <strong>K650</strong></p>
+    </div>
+
+    <div class="offer-card">
+      <span class="offer-badge gold">PREMIUM</span>
+      <h4>5x5 Premium</h4>
+      <p class="offer-price"><del>K1200</del> <strong>K1000</strong></p>
+    </div>
+  </div>
+  <br>
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-title">
+    <h3>Our System Services</h3>
+    <p>Everything you need to manage market booths efficiently</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="service-card">
+        <img src="booth.jpg" alt="Booth Allocation"
+             style="width:80%;border-radius:14px;margin-bottom:15px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-store"></i></div>
+      <p>Smart and transparent allocation of available market booths.</p>
+    </div>
+
+    <div class="service-card">
+        <img src="judy.jpg" alt="Online Application"
+             style="width:60%;border-radius:14px;margin-bottom:15px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-file-signature"></i></div>
+      <p>Vendors apply for booths online without visiting offices.</p>
+    </div>
+
+    <div class="service-card">
+        <img src="mbwe.jpg" alt="Secure Payments"
+             style="width:80%;border-radius:14px;margin-bottom:15px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-credit-card"></i></div>
+      <p>Integrated payment process for fast booth confirmation.</p>
+    </div>
+
+    <div class="service-card">
+        <img src="adam.jpg" alt="Vendor Management"
+             style="width:80%;border-radius:14px;margin-bottom:15px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-user-check"></i></div>
+      <p>Track vendor details, approvals, and booth status.</p>
+    </div>
+
+    <div class="service-card">
+        <img src="report.jpg" alt="Reports and Analytics"
+             style="width:100%;border-radius:20px;margin-bottom:30px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+      <p>Daily reports on occupancy, payments, and availability.</p>
+    </div>
+
+    <div class="service-card">
+        <img src="suport.jpg" alt="Support"
+             style="width:100%;border-radius:30px;margin-bottom:20px;">
+      </a>
+      <div class="service-icon"><i class="fas fa-headset"></i></div>
+      <p>Reliable support for vendors and administrators.</p>
+    </div>
+
+  </div>
+</section>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-title"><h3>What Vendors Say</h3></div>
+  <div class="grid">
+    <div class="testimonial">“I applied online and got approved fast.”</div>
+    <div class="testimonial">“Very professional system.”</div>
+    <div class="testimonial">“The offers saved me money.”</div>
+  </div>
+</section>
+<!-- QUICK CUSTOMER QUESTIONS -->
+<section id="faq">
+  <div class="section-title">
+    <h3>Quick Vendor Questions</h3>
+    <p>Helpful answers to common questions before applying</p>
+  </div>
+
+  <div class="grid">
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>How do I apply for a market booth?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Browse available booths on the homepage, select your preferred booth,
+        then complete the online application and payment process.
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>Do I need to visit the market office?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        No. The entire process is online including application, payment,
+        and approval notifications.
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>How do I know if a booth is available?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Available booths are shown in real-time on the homepage
+        under the “Available Booths” section.
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>Is payment secure?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Yes. Payments are processed securely and your booth
+        is reserved immediately after successful payment.
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>Can I change my selected booth later?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Booth changes are subject to availability and approval
+        by the market administrator.
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        <span>Who can I contact for help?</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        Use the contact options at the bottom of the page
+        or reach out via WhatsApp or Email for assistance.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#booths">Booths</a>
+      <a href="#offers">Offers</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+
+    </div>
+    <div>
+      <h4>Contact information</h4>
+  <br>
+<div class="social-icons">
+  <a href="mailto:info@marketbooth.com" title="Email us">
+    <i class="fas fa-envelope"></i>
+  </a>
+
+  <a href="https://wa.me/260776740853" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://www.facebook.com/MarketBoothSystem" target="_blank" title="Visit Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://twitter.com/MarketBoothSys" target="_blank" title="Visit Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@MarketBoothSystem" target="_blank" title="Visit YouTube">
+    <i class="fab fa-youtube"></i>
+  </a>
+</div>
+
+    </div>
+  </div>
+  <br>
+    <hr>
+    <br>
+  © 2026 Market Booth Management System Developed By Mwanda Tembani | All Rights Reserved
+</footer>
+
+<!-- ✅ EXTERNAL JAVASCRIPT -->
+<script src="index.js"></script>
+
+</body>
+</html>

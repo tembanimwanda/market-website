@@ -1,0 +1,82 @@
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#eef2f5;color:#333}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1abc9c,#16a085);
+  color:#fff;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+header h2{font-size:18px;font-weight:600}
+header button{
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  background:#e74c3c;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+header button:hover{background:#c0392b}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:auto;padding:20px}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  margin-bottom:25px;
+  transition:0.3s;
+}
+.card:hover{box-shadow:0 15px 35px rgba(0,0,0,0.12)}
+
+/* FORM */
+.form-grid{display:grid;gap:15px;margin-bottom:15px}
+@media(min-width:768px){.form-grid{grid-template-columns:repeat(5,1fr)}}
+input,select{
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:14px;
+  transition:0.3s;
+}
+input:focus,select:focus{border-color:#1abc9c;outline:none}
+button{padding:12px 18px;border:none;border-radius:14px;font-weight:bold;cursor:pointer;transition:0.3s}
+.btn-save{background:#1abc9c;color:#fff}
+.btn-save:hover{background:#16a085}
+.btn-clear{background:#bdc3c7;color:#fff}
+.btn-clear:hover{background:#95a5a6}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:12px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #ddd;font-size:14px;text-align:left}
+th{background:#1abc9c;color:#fff;font-weight:600;border-radius:8px 8px 0 0}
+.available{color:#27ae60;font-weight:bold}
+.action{
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:12px;
+  border:none;
+  cursor:pointer;
+  margin-right:5px;
+  transition:0.3s;
+}
+.delete{background:#95a5a6;color:#fff}
+.delete:hover{background:#c0392b}
+
+/* MOBILE */
+@media(max-width:768px){
+  .form-grid{grid-template-columns:1fr}
+  th,td{font-size:13px}
+  td button{margin-bottom:5px;width:100%}
+  header{flex-direction:column;align-items:flex-start;gap:10px}
+}

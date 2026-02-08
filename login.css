@@ -1,0 +1,100 @@
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+
+/* ===== BODY ===== */
+body{
+  background: linear-gradient(135deg,#1abc9c,#16a085);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ===== LOGIN BOX ===== */
+.login-box{
+  background:#fff;
+  padding:40px 30px;
+  border-radius:15px;
+  width:100%;
+  max-width:400px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  text-align:center;
+}
+
+.login-box h2{
+  margin-bottom:25px;
+  color:#1abc9c;
+  font-size:28px;
+}
+
+.login-box .form-group{
+  text-align:left;
+  margin-bottom:20px;
+}
+
+.login-box label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+.login-box input, .login-box select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+.login-box select{
+  background:#fff;
+}
+
+/* ===== BUTTON ===== */
+.login-box .btn{
+  width:100%;
+  padding:14px;
+  background:#1abc9c;
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+  font-size:16px;
+}
+
+.login-box .btn:hover{
+  background:#16a085;
+}
+
+/* ===== ERROR ===== */
+.error{
+  display:none;
+  background:#e74c3c;
+  color:#fff;
+  padding:10px 12px;
+  border-radius:8px;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+/* ===== BACK HOME ===== */
+.back-home{
+  margin-top:20px;
+}
+.back-home a{
+  text-decoration:none;
+  color:#16a085;
+  font-size:14px;
+}
+.back-home a:hover{
+  text-decoration:underline;
+}
+
+/* ===== ICON ===== */
+.login-box h2 i{
+  margin-right:8px;
+  color:#16a085;
+}
